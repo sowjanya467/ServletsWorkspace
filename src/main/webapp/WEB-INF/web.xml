@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+	version="3.1">
+	<display-name>Servlet</display-name>
+
+	<welcome-file-list>
+	    <welcome-file>index2.jsp</welcome-file>
+		<welcome-file>prelogin.html</welcome-file>
+	</welcome-file-list>
+	
+
+	<servlet-mapping>
+		<servlet-name>login</servlet-name>
+		<url-pattern>/LoginServlet</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>login</servlet-name>
+		<servlet-class>com.bridgelabz.servlets.LoginServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>Register</servlet-name>
+		<servlet-class>com.bridgelabz.servlets.RegistrationPage</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>Register</servlet-name>
+		<url-pattern>/RegistrationPage</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>ChangePassword</servlet-name>
+		<servlet-class>com.bridgelabz.servlets.ChangePassword</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ChangePassword</servlet-name>
+		<url-pattern>/ChangePassword</url-pattern>
+	</servlet-mapping>
+	<servlet>
+	<servlet-name>Welcome</servlet-name>
+	<servlet-class>com.bridgelabz.servlets.WelcomePage</servlet-class>
+	</servlet>
+	<servlet-mapping>
+	<servlet-name>Welcome</servlet-name>
+	<url-pattern>/WelcomePage</url-pattern>
+	</servlet-mapping>
+    <servlet>
+    <servlet-name>logout</servlet-name>
+    <servlet-class>com.bridgelabz.servlets.Logout</servlet-class>
+    </servlet>
+    <servlet-mapping>
+    <servlet-name>logout</servlet-name>
+    <url-pattern>/Logout</url-pattern>
+    </servlet-mapping>
+     
+   <servlet>
+    <servlet-name>PreLogin</servlet-name>
+    <servlet-class>com.bridgelabz.servlets.PreLogin</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PreLogin</servlet-name>
+    <url-pattern>/PreLogin</url-pattern>
+  </servlet-mapping>
+   <servlet>
+    <servlet-name>PreRegister</servlet-name>
+    <servlet-class>com.bridgelabz.servlets.PreRegister</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PreRegister</servlet-name>
+    <url-pattern>/PreRegister</url-pattern>
+  </servlet-mapping>
+ <servlet>
+    <servlet-name>PreSuccess</servlet-name>
+   <servlet-class>com.bridgelabz.servlets.PreSuccess</servlet-class> 
+  <!--  <jsp-file>/Presuccess.jsp</jsp-file> -->
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PreSuccess</servlet-name>
+    <url-pattern>/PreSuccess</url-pattern>
+  </servlet-mapping>
+   <servlet>
+    <servlet-name>PreError</servlet-name>
+   <servlet-class>com.bridgelabz.servlets.PreError</servlet-class> 
+  <!--  <jsp-file>/Presuccess.jsp</jsp-file> -->
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>PreError</servlet-name>
+    <url-pattern>/PreError</url-pattern>
+  </servlet-mapping>
+  
+  <filter>
+  	<description>
+  	</description>
+  	<display-name>RegisterFilter</display-name>
+  	<filter-name>RegisterFilter</filter-name>
+  	<filter-class>com.bridgelabz.servlets.RegisterFilter</filter-class>
+  </filter>
+  
+  <filter-mapping>
+  	<filter-name>RegisterFilter</filter-name>
+  	<url-pattern>/RegistrationPage</url-pattern>
+  </filter-mapping>
+  
+</web-app>
