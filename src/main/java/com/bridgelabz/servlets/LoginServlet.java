@@ -8,12 +8,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class LoginServlet extends HttpServlet
+public class LoginServlet extends HttpServlet 
 {
 
 	private static final long serialVersionUID = -2451053518061528180L;
@@ -42,11 +43,21 @@ public class LoginServlet extends HttpServlet
 			if (rs.next()) 
 			{
 				HttpSession session = req.getSession(true);
+				
 				session.setMaxInactiveInterval(1 * 60);
 				session.setAttribute("user_name", user_name);
+				  
 				RequestDispatcher dispatch = req.getRequestDispatcher("PreSuccess");
 				dispatch.forward(req, resp);
+				if(session.isNew())
+				{
+					    ServletContext ctx=getServletContext();  
+				        int t=(Integer)ctx.getAttribute("total_users");  
+				        int c=(Integer)ctx.getAttribute("current_users");  
+				        out.print("<br>total users= "+t);  
+				        out.print("<br>current users= "+c);
 
+				}
 			} 
 			else 
 			{
@@ -56,7 +67,7 @@ public class LoginServlet extends HttpServlet
 				dispatch.forward(req, resp);
 			}
 		} 
-		catch (Exception e) 
+		catch (Exception e)
 		{
 			e.printStackTrace();
 		} 
@@ -67,7 +78,8 @@ public class LoginServlet extends HttpServlet
 				utility.closeConnection();
 
 			} 
-			catch (SQLException e) {
+			catch (SQLException e) 
+			{
 				e.printStackTrace();
 
 			}

@@ -2,12 +2,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>login unsuccess</title>
 </head>
 <body>
-<h1>INVALID DETAILS</h1>
-<%String id=(String)request.getSession().getAttribute("user_name");
-out.print(id);%>
-<input type="submit" value="Logout"/>
-</form>
+	<h1>INVALID DETAILS</h1>
+	<%
+		String id = (String) request.getSession().getAttribute("user_name");
+		out.print(id);
+		request.getRequestDispatcher("login.html").include(request, response);
+	%>
+	
 </body>

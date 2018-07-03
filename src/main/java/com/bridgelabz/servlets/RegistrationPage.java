@@ -7,9 +7,11 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * @author bridgelabz
@@ -17,9 +19,6 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class RegistrationPage extends HttpServlet 
 {
-	/**
-	 * 
-	 */
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException 
 	{
@@ -31,8 +30,7 @@ public class RegistrationPage extends HttpServlet
 		String mobileNum = req.getParameter("mobile_num");
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		try
-		{
+		try {
 			String dbUrl = "jdbc:mysql://localhost:3306/logincredentials?useSSL=false";
 
 			Class.forName("com.mysql.jdbc.Driver");
@@ -45,34 +43,29 @@ public class RegistrationPage extends HttpServlet
 			pstmt.setString(3, password);
 			pstmt.setString(4, mobileNum);
 			int count = pstmt.executeUpdate();
-			if (count > 0) 
-			{
-				out.println("<html><body><h2>You are sucessfully registered</h2></body></html>");
-			}
-			else
-			{
+			if(count>0)
+	          {
+				out.println("<html><body><h2>You are successfully registered</h2></body></html>");
+
+				HttpSession session=req.getSession(true);
+				session.setAttribute("user_name",name);
+	            RequestDispatcher dispatch=req.getRequestDispatcher("PreLogin");
+				dispatch.forward(req, resp);
+	          } else {
 				out.println("<html><body><h2>You are not registered</h2></body></html>");
 			}
-		}
-		catch (Exception e) 
-		{
+		} catch (Exception e) {
 			e.printStackTrace();
-		}
-		finally 
-		{
+		} finally {
 
 			try {
-				if (con != null) 
-				{
+				if (con != null) {
 					con.close();
 				}
-				if (pstmt != null) 
-				{
+				if (pstmt != null) {
 					pstmt.close();
 				}
-			} 
-			catch (SQLException e) 
-			{
+			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}

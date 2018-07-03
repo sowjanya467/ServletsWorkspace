@@ -16,6 +16,7 @@
 		<url-pattern>/LoginServlet</url-pattern>
 	</servlet-mapping>
 	
+	
 	<servlet>
 		<servlet-name>login</servlet-name>
 		<servlet-class>com.bridgelabz.servlets.LoginServlet</servlet-class>
@@ -102,5 +103,8 @@
   	<filter-name>RegisterFilter</filter-name>
   	<url-pattern>/RegistrationPage</url-pattern>
   </filter-mapping>
+  <listener>
+		<listener-class>com.bridgelabz.servlets.LoginListener</listener-class>
+	</listener>
   
 </web-app>

@@ -19,8 +19,7 @@ input {
 
 	<form action="LoginServlet" method="post">
 		<fieldset title="LOGIN">
-				<h3>login sucess</h3>
-		
+
 			<legend>
 				<B>LOGIN</B>
 			</legend>
@@ -36,7 +35,7 @@ input {
 				<tr>
 					<td><input type="submit" value="login"></td>
 					<td><input type="reset" value="reset"></td>
-					
+
 				</tr>
 				<tr>
 					<td>&nbsp;</td>

@@ -1,16 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>home page</title>
 </head>
 <body>
-<form action="index2">
-<center><b><p><h1>welcome!!!</b></p></h1></center>
-<pre>       <h3 align="center"><font color="green" face="calibri"><a href="login.html">LoginRegistration</a> <a href="registration.html">Registration</a></font></h3></pre>
-</form>
+	<form action="index2">
+		<center>
+			<b>
+			<p>
+				<h1>welcome to portal!!!</b>
+			</p>
+			</h1>
+		</center>
+		<pre>       <h3 align="center">
+				<font color="blue" face="calibri">
+				<a href="login.html">LoginRegistration</a> 
+				<a	href="registration.html">Registration</a></font>
+			</h3>
+		</pre>
+	</form>
 
 </body>
 </html>
