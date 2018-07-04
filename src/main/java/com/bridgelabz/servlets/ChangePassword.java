@@ -1,4 +1,13 @@
 package com.bridgelabz.servlets;
+/*************************************************************************************************************
+*
+* purpose:To recover the password of user
+*
+* @author sowjanya467
+* @version 1.0
+* @since 4-05-18
+*
+* **************************************************************************************************/
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -6,7 +15,15 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.Properties;
 
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -16,66 +33,56 @@ import javax.servlet.http.HttpServletResponse;
 @SuppressWarnings("serial")
 public class ChangePassword extends HttpServlet 
 {
-	RequestDispatcher dispatcher = null;
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException 
 	{
-		Utility u =new Utility();
+		RequestDispatcher dispatcher = null;
+		String USER_NAME = "msowjanya2014"; // GMail user name (just the part before "@gmail.com")
+		String PASSWORD = "palem489"; // GMail password
 
-		resp.setContentType("text/html");
-		PrintWriter out = resp.getWriter();
+		String RECIPIENT = req.getParameter("email_id");
+		String from = USER_NAME;
+		String pass = PASSWORD;
+		String to = RECIPIENT; // list of recipient email addresses
+		String subject = "recover your password";
+		String body = "your password is so232";
 
-		// Get form data
-		String user_name = req.getParameter("user_name");
-		String currentPassword = req.getParameter("currentPassword");
-		String newPasssword = req.getParameter("newPassword");
-		String reNewPassword = req.getParameter("renternewPassword");
+		Properties props = System.getProperties();
+		String host = "smtp.gmail.com";
 
-		// Check New Password & Retype New Password is Same
-		if (newPasssword.equals(reNewPassword)) 
-		{
-			// New Password = Retype New Password; Hence Update
-			Connection con = null;
-			PreparedStatement pstmt = null;
-			try
-			{
-				// Load the driver
-				Class.forName("com.mysql.jdbc.Driver");
-				// 2. Get the DB Connection via Driver
-				String dbUrl = "jdbc:mysql://localhost:3306/logincredentials?user=root&password=root";
-				con = DriverManager.getConnection(dbUrl);
-				// Issue SQL queries via connection
-				String query = "update login set password=? where user_name=?";
+		props.put("mail.smtp.starttls.enable", "true");
 
-				System.out.println("Query=" + query);
-				pstmt = con.prepareStatement(query);
+		props.put("mail.smtp.ssl.trust", host);
+		props.put("mail.smtp.user", from);
+		props.put("mail.smtp.password", pass);
+		props.put("mail.smtp.port", "587");
+		props.put("mail.smtp.auth", "true");
 
-				pstmt.setString(1, newPasssword);
+		Session session = Session.getDefaultInstance(props);
+		MimeMessage message = new MimeMessage(session);
 
-				pstmt.setString(2, user_name);
+		try {
 
-				pstmt.executeUpdate();
+			message.setFrom(new InternetAddress(from));
 
-			}
-			catch (Exception e) 
-			{
-				e.printStackTrace();
-			}
-			finally 
-			{
-				try 
-				{
-				   u.closeConnection();
-				}
-				catch (SQLException e) 
-				{
-					e.printStackTrace();
-				}
-			}
+			message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+			message.setSubject(subject);
+			message.setText(body);
 
-			dispatcher = req.getRequestDispatcher("changepassword.html");
-			dispatcher.include(req, resp);
+			Transport transport = session.getTransport("smtp");
 
+			transport.connect(host, from, pass);
+			transport.sendMessage(message, message.getAllRecipients());
+			transport.close();
+			
 		}
+
+		catch (AddressException ae) {
+			ae.printStackTrace();
+		} catch (MessagingException me) {
+			me.printStackTrace();
+		}
+
+		req.getRequestDispatcher("login.html");
 	}
 }

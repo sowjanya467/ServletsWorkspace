@@ -1,4 +1,12 @@
 package com.bridgelabz.servlets;
+/*************************************************************************************************************
+*
+* purpose:login page using servlets
+* @author sowjanya467
+* @version 1.0
+*  @since 4-05-18
+*
+* **************************************************************************************************/
 
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -14,22 +22,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class LoginServlet extends HttpServlet 
-{
+public class LoginServlet extends HttpServlet {
 
 	private static final long serialVersionUID = -2451053518061528180L;
 	Utility utility = new Utility();
 
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) 
-	{
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
 
 		String user_name = req.getParameter("user_name");
 		String password = req.getParameter("password");
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		try 
-		{
+		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			String dbUrl = "jdbc:mysql://localhost:3306/logincredentials?user=root&password=root";
 			con = DriverManager.getConnection(dbUrl);
@@ -40,46 +45,35 @@ public class LoginServlet extends HttpServlet
 			rs = pstmt.executeQuery();
 			resp.setContentType("text/html");
 			PrintWriter out = resp.getWriter();
-			if (rs.next()) 
-			{
+			if (rs.next()) {
 				HttpSession session = req.getSession(true);
-				
+
 				session.setMaxInactiveInterval(1 * 60);
 				session.setAttribute("user_name", user_name);
-				  
+
 				RequestDispatcher dispatch = req.getRequestDispatcher("PreSuccess");
 				dispatch.forward(req, resp);
-				if(session.isNew())
-				{
-					    ServletContext ctx=getServletContext();  
-				        int t=(Integer)ctx.getAttribute("total_users");  
-				        int c=(Integer)ctx.getAttribute("current_users");  
-				        out.print("<br>total users= "+t);  
-				        out.print("<br>current users= "+c);
+				if (session.isNew()) {
+					ServletContext ctx = getServletContext();
+					int t = (Integer) ctx.getAttribute("total_users");
+					int c = (Integer) ctx.getAttribute("current_users");
+					out.print("<br>total users= " + t);
+					out.print("<br>current users= " + c);
 
 				}
-			} 
-			else 
-			{
+			} else {
 				HttpSession session = req.getSession(true);
 				session.setAttribute("user_name", user_name);
 				RequestDispatcher dispatch = req.getRequestDispatcher("PreError");
 				dispatch.forward(req, resp);
 			}
-		} 
-		catch (Exception e)
-		{
+		} catch (Exception e) {
 			e.printStackTrace();
-		} 
-		finally 
-		{
-			try 
-			{
+		} finally {
+			try {
 				utility.closeConnection();
 
-			} 
-			catch (SQLException e) 
-			{
+			} catch (SQLException e) {
 				e.printStackTrace();
 
 			}

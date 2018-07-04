@@ -1,4 +1,12 @@
 package com.bridgelabz.servlets;
+/*************************************************************************************************************
+*
+* purpose:Welcome page
+* @author sowjanya467
+* @version 1.0
+*  @since 4-05-18
+*
+* **************************************************************************************************/
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -9,15 +17,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class WelcomePage extends HttpServlet 
-{
+public class WelcomePage extends HttpServlet {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException 
-	{
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 		String name = (String) req.getAttribute("user_name");
 		String gmail = (String) req.getAttribute("email_id");
 		String password = (String) req.getAttribute("password");

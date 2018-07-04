@@ -1,4 +1,12 @@
 package com.bridgelabz.servlets;
+/*************************************************************************************************************
+*
+* purpose:Registration Servlet
+* @author sowjanya467
+* @version 1.0
+*  @since 4-05-18
+*
+* **************************************************************************************************/
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -17,11 +25,11 @@ import javax.servlet.http.HttpSession;
  * @author bridgelabz
  *
  */
-public class RegistrationPage extends HttpServlet 
-{
+public class RegistrationPage extends HttpServlet {
 
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException 
-	{
+	Utility u = new Utility();
+
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		resp.setContentType("text/html");
 		PrintWriter out = resp.getWriter();
 		String email = req.getParameter("email_id");
@@ -43,31 +51,26 @@ public class RegistrationPage extends HttpServlet
 			pstmt.setString(3, password);
 			pstmt.setString(4, mobileNum);
 			int count = pstmt.executeUpdate();
-			if(count>0)
-	          {
+			if (count > 0) {
 				out.println("<html><body><h2>You are successfully registered</h2></body></html>");
 
-				HttpSession session=req.getSession(true);
-				session.setAttribute("user_name",name);
-	            RequestDispatcher dispatch=req.getRequestDispatcher("PreLogin");
+				HttpSession session = req.getSession(true);
+				session.setAttribute("user_name", name);
+				RequestDispatcher dispatch = req.getRequestDispatcher("PreLogin");
 				dispatch.forward(req, resp);
-	          } else {
+			} else {
 				out.println("<html><body><h2>You are not registered</h2></body></html>");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-
 			try {
-				if (con != null) {
-					con.close();
-				}
-				if (pstmt != null) {
-					pstmt.close();
-				}
+				u.closeConnection();
 			} catch (SQLException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+
 		}
 	}
 }
