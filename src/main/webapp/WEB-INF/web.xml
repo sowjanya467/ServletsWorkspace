@@ -23,8 +23,9 @@
 	</servlet>
 	<servlet>
 		<servlet-name>Register</servlet-name>
-		<servlet-class>com.bridgelabz.servlets.RegistrationPage</servlet-class>
-	</servlet>
+<!-- 		<servlet-class>com.bridgelabz.servlets.RegistrationPage</servlet-class>-->	
+
+</servlet>
 
 	<servlet-mapping>
 		<servlet-name>Register</servlet-name>
@@ -73,8 +74,8 @@
   </servlet-mapping>
  <servlet>
     <servlet-name>PreSuccess</servlet-name>
-   <servlet-class>com.bridgelabz.servlets.PreSuccess</servlet-class> 
-  <!--  <jsp-file>/Presuccess.jsp</jsp-file> -->
+ 	<servlet-class>com.bridgelabz.servlets.PreSuccess</servlet-class>
+<!-- 	<jsp-file>/Presuccess.jsp</jsp-file> -->
   </servlet>
   <servlet-mapping>
     <servlet-name>PreSuccess</servlet-name>
@@ -82,9 +83,9 @@
   </servlet-mapping>
    <servlet>
     <servlet-name>PreError</servlet-name>
-   <servlet-class>com.bridgelabz.servlets.PreError</servlet-class> 
-  <!--  <jsp-file>/Presuccess.jsp</jsp-file> -->
-  </servlet>
+   <servlet-class>com.bridgelabz.servlets.PreError</servlet-class>  
+<!--         <jsp-file>/Preerror.jsp</jsp-file> 
+ -->  </servlet>
   
   <servlet-mapping>
     <servlet-name>PreError</servlet-name>

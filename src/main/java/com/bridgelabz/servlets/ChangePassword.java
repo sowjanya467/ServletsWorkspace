@@ -31,11 +31,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @SuppressWarnings("serial")
-public class ChangePassword extends HttpServlet 
-{
+public class ChangePassword extends HttpServlet {
 
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException 
-	{
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		RequestDispatcher dispatcher = null;
 		String USER_NAME = "msowjanya2014"; // GMail user name (just the part before "@gmail.com")
 		String PASSWORD = "palem489"; // GMail password
@@ -45,7 +43,8 @@ public class ChangePassword extends HttpServlet
 		String pass = PASSWORD;
 		String to = RECIPIENT; // list of recipient email addresses
 		String subject = "recover your password";
-		String body = "your password is so232";
+		String res = GetPassword.validationPassword(to);
+		String body = "your password is " + res;
 
 		Properties props = System.getProperties();
 		String host = "smtp.gmail.com";
@@ -74,7 +73,7 @@ public class ChangePassword extends HttpServlet
 			transport.connect(host, from, pass);
 			transport.sendMessage(message, message.getAllRecipients());
 			transport.close();
-			
+
 		}
 
 		catch (AddressException ae) {

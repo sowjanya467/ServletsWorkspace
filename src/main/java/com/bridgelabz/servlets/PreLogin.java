@@ -26,10 +26,10 @@ public class PreLogin extends HttpServlet {
 		System.out.println("precontroller");
 		out.println("<html><body><h2>You are not registered</h2></body></html>");
 
-		req.getRequestDispatcher("prelogin.html").forward(req, resp);
+		req.getRequestDispatcher("PreLogin").forward(req, resp);
 	}
 
-	protected void dopost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		doGet(req, resp);
 	}
 

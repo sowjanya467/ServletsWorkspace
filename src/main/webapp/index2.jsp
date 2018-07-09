@@ -17,7 +17,8 @@
 		</center>
 		<pre>       <h3 align="center">
 				<font color="blue" face="calibri">
-				<a href="login.html">LoginRegistration</a> 
+				<a href="login.html">Login</a>
+				 
 				<a	href="registration.html">Registration</a></font>
 			</h3>
 		</pre>
